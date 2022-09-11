@@ -1,16 +1,13 @@
-import 'package:clean_arch_ug/weather/data/datasource/remote_dataresource.dart';
-import 'package:clean_arch_ug/weather/data/repository/weather_repository.dart';
-import 'package:clean_arch_ug/weather/domain/entities/weather.dart';
-import 'package:clean_arch_ug/weather/domain/repository/base_weather_repository.dart';
-import 'package:clean_arch_ug/weather/domain/usecases/weather_by_country.dart';
+import 'package:clean_arch_ug/weather_module/data/datasource/remote_dataresource.dart';
+import 'package:clean_arch_ug/weather_module/data/repository/weather_repository.dart';
+import 'package:clean_arch_ug/weather_module/domain/entities/weather.dart';
+import 'package:clean_arch_ug/weather_module/domain/repository/base_weather_repository.dart';
+import 'package:clean_arch_ug/weather_module/domain/usecases/weather_by_country.dart';
 import 'package:flutter/material.dart';
 
 void main() async{
 
-  BaseRemoteDataResource baseRemoteDataResource = RemoteDataResource();
-  BaseWeatherRepository baseWeatherRepository = WeatherRepository(baseRemoteDataResource);
-  Weather weather = await GetWeatherByCountryName(baseWeatherRepository).execute('Egypt');
-  print(weather.cityName);
+  
   runApp(const MyApp());
 }
 
