@@ -5,3 +5,9 @@ class ServerModelException implements Exception{
 
   ServerModelException({required this.errorMessageModel});
 }
+
+class DatabaseException implements Exception{
+  final String message;
+
+  DatabaseException({required this.message});
+}

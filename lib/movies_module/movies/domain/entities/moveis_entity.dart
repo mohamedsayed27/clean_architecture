@@ -6,10 +6,8 @@ class MoviesEntity extends Equatable {
   final String backdropPath;
   final double voteAverage;
   final String releaseDate;
-
   final List<int> genderIdes;
-  final double overview;
-
+  final String overview;
 
   const MoviesEntity({
     required this.id,
@@ -22,6 +20,13 @@ class MoviesEntity extends Equatable {
   });
 
   @override
-  List<Object> get props =>
-      [id, title, backdropPath, voteAverage, genderIdes, overview,releaseDate,];
+  List<Object> get props => [
+        id,
+        title,
+        backdropPath,
+        voteAverage,
+        genderIdes,
+        overview,
+        releaseDate,
+      ];
 }

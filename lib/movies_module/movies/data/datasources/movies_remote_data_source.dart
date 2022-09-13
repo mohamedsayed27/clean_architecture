@@ -23,7 +23,7 @@ class MoviesRemoteDatasource extends BaseMoviesRemoteDatasource {
   @override
   Future<List<MoviesModel>> getNowPlayingMovies() async {
     Response response = await Dio().get(
-        '${MovieAppConstants.baseUrl}${MovieAppConstants.nowPlayingEndPoint}?api_key=${MovieAppConstants.apiKey}');
+        '${MovieAppConstants.baseUrl}${MovieAppConstants.nowPlayingMoviesEndPoint}?api_key=${MovieAppConstants.apiKey}');
 
     if (response.statusCode == 200) {
       for (var element in response.data['results']) {
@@ -40,7 +40,7 @@ class MoviesRemoteDatasource extends BaseMoviesRemoteDatasource {
   @override
   Future<List<MoviesModel>> getPopularMovies() async {
     Response response = await Dio().get(
-        '${MovieAppConstants.baseUrl}${MovieAppConstants.popularMovies}?api_key=${MovieAppConstants.apiKey}');
+        '${MovieAppConstants.baseUrl}${MovieAppConstants.popularMoviesEndPoint}?api_key=${MovieAppConstants.apiKey}');
 
     if (response.statusCode == 200) {
       for (var element in response.data['results']) {
@@ -57,7 +57,7 @@ class MoviesRemoteDatasource extends BaseMoviesRemoteDatasource {
   @override
   Future<List<MoviesModel>> getTopRatedMovies() async{
     Response response = await Dio().get(
-        '${MovieAppConstants.baseUrl}${MovieAppConstants.topRatedMovies}?api_key=${MovieAppConstants.apiKey}');
+        '${MovieAppConstants.baseUrl}${MovieAppConstants.topRatedMoviesEndPoint}?api_key=${MovieAppConstants.apiKey}');
 
     if (response.statusCode == 200) {
       for (var element in response.data['results']) {
