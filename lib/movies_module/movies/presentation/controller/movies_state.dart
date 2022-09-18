@@ -3,20 +3,20 @@ import 'package:clean_arch_ug/movies_module/movies/domain/entities/moveis_entity
 import 'package:equatable/equatable.dart';
 
 class MoviesState extends Equatable {
-  final List<MoviesEntity> nowPlayinMovies;
+  final List<MoviesEntity> nowPlayingMovies;
   final RequestState requestState;
-  final String nowPlayinMessage;
+  final String nowPlayingMessage;
 
   const MoviesState({
-    this.nowPlayinMovies = const [],
+    this.nowPlayingMovies = const [],
     this.requestState = RequestState.isLoading,
-    this.nowPlayinMessage = '',
+    this.nowPlayingMessage = '',
   });
 
   @override
   List<Object> get props => [
-        nowPlayinMovies,
+        nowPlayingMovies,
         requestState,
-        nowPlayinMessage,
+        nowPlayingMessage,
       ];
 }
