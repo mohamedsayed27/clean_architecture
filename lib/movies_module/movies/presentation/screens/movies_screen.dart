@@ -3,6 +3,7 @@ import 'package:clean_arch_ug/movies_module/movies/presentation/components/now_p
 import 'package:clean_arch_ug/movies_module/movies/presentation/components/popular_component.dart';
 import 'package:clean_arch_ug/movies_module/movies/presentation/components/top_rated_component.dart';
 import 'package:clean_arch_ug/movies_module/movies/presentation/controller/movies_bloc.dart';
+import 'package:clean_arch_ug/movies_module/movies/presentation/controller/movies_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +15,7 @@ class MainMoviesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider(
-        create: (context) => sl<MoviesBloc>(),
+        create: (context) => sl<MoviesBloc>()..add(GetNowPlayingMoviesEvent()),
         child: Scaffold(
           backgroundColor: Colors.grey.shade800,
           body: SingleChildScrollView(
