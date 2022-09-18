@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:clean_arch_ug/weather_module/core/utils/constants.dart';
 import 'package:dio/dio.dart';
 

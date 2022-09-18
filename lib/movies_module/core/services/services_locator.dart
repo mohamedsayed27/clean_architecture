@@ -11,7 +11,7 @@ class ServicesLocator{
   void init(){
 
     ///BLoC
-    sl.registerFactory(() => MoviesBloc(sl()));
+    sl.registerFactory(() => MoviesBloc(sl(),sl(),sl()));
 
     ///USE CASES
     sl.registerLazySingleton(() => GetNowMoviesPlayingUseCase(sl()));

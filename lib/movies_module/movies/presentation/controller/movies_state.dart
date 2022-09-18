@@ -7,16 +7,36 @@ class MoviesState extends Equatable {
   final RequestState nowPlayingState;
   final String nowPlayingMessage;
 
+  final List<MoviesEntity> popularMovies;
+  final RequestState popularState;
+  final String popularMessage;
+
+  final List<MoviesEntity> topRatedMovies;
+  final RequestState topRatedState;
+  final String topRatedMessage;
+
   const MoviesState({
     this.nowPlayingMovies = const [],
     this.nowPlayingState = RequestState.isLoading,
     this.nowPlayingMessage = '',
+    this.popularMovies = const [],
+    this.popularState = RequestState.isLoading,
+    this.popularMessage = '',
+    this.topRatedMovies = const [],
+    this.topRatedState = RequestState.isLoading,
+    this.topRatedMessage = '',
   });
 
   @override
   List<Object> get props => [
         nowPlayingMovies,
-    nowPlayingState,
+        nowPlayingState,
         nowPlayingMessage,
+        popularMovies,
+        popularMessage,
+        popularState,
+        topRatedMessage,
+        topRatedState,
+        topRatedMovies,
       ];
 }

@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clean_arch_ug/movies_module/core/utils/app_constants.dart';
-import 'package:clean_arch_ug/movies_module/core/utils/dummy.dart';
 import 'package:clean_arch_ug/movies_module/core/utils/enums.dart';
 import 'package:clean_arch_ug/movies_module/movies/presentation/controller/movies_bloc.dart';
 import 'package:clean_arch_ug/movies_module/movies/presentation/controller/movies_state.dart';
@@ -18,8 +17,11 @@ class NowPlayingComponent extends StatelessWidget {
       builder: (context, state) {
         switch (state.nowPlayingState) {
           case RequestState.isLoading:
-            return const Center(
-              child: CircularProgressIndicator(),
+            return const SizedBox(
+              height: 400.0,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           case RequestState.isLoaded:
             return FadeIn(
@@ -30,7 +32,7 @@ class NowPlayingComponent extends StatelessWidget {
                   viewportFraction: 1.0,
                   onPageChanged: (index, reason) {},
                 ),
-                items: moviesList.map(
+                items: state.nowPlayingMovies.map(
                   (item) {
                     return GestureDetector(
                       key: const Key('openMovieMinimalDetail'),
