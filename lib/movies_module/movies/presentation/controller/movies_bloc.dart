@@ -14,32 +14,45 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   MoviesBloc(this.getNowMoviesPlayingUseCase, this.getPopularMoviesUseCase,
       this.getTopRatedMoviesUseCase)
       : super(const MoviesState()) {
-    on<GetNowPlayingMoviesEvent>((event, emit) async {
-      final result = await getNowMoviesPlayingUseCase.execute();
-      result.fold(
-          (l) => emit(MoviesState(
-              nowPlayingState: RequestState.isError,
-              nowPlayingMessage: l.message)),
-          (r) => emit(MoviesState(
-              nowPlayingState: RequestState.isLoaded, nowPlayingMovies: r)));
-    });
+    on<GetNowPlayingMoviesEvent>(_getNowPlayingMethod);
 
-    on<GetPopularMoviesEvent>((event, emit) async {
-      final result = await getPopularMoviesUseCase.execute();
-      result.fold(
-          (l) => emit(MoviesState(
-              popularState: RequestState.isError, popularMessage: l.message)),
-          (r) => emit(MoviesState(
-              popularMovies: r, popularState: RequestState.isLoaded)));
-    });
+    on<GetPopularMoviesEvent>(_getPopularMethod);
 
-    on<GetTopRatedMoviesEvent>((event, emit) async {
-      final result = await getTopRatedMoviesUseCase.execute();
-      result.fold(
-          (l) => emit(MoviesState(
-              topRatedMessage: l.message, topRatedState: RequestState.isError)),
-          (r) => emit(MoviesState(
-              topRatedMovies: r, topRatedState: RequestState.isLoaded)));
-    });
+    on<GetTopRatedMoviesEvent>(_getTopRatedMethod);
   }
+
+
+  Future<void> _getNowPlayingMethod(event, emit) async {
+    final result = await getNowMoviesPlayingUseCase();
+    result.fold(
+            (l) => emit(
+            state.copyWith(
+                nowPlayingState:RequestState.isError,
+                nowPlayingMessage: l.message
+            )),
+            (r) => emit(
+            state.copyWith(
+                nowPlayingState: RequestState.isLoaded,
+                nowPlayingMovies: r
+            )));
+  }
+
+  Future<void> _getPopularMethod(event, emit) async {
+    final result = await getPopularMoviesUseCase();
+    result.fold(
+            (l) => emit(state.copyWith(
+            popularState: RequestState.isError, popularMessage: l.message)),
+            (r) => emit(state.copyWith(
+            popularMovies: r, popularState: RequestState.isLoaded)));
+  }
+
+  Future<void> _getTopRatedMethod(event, emit) async {
+    final result = await getTopRatedMoviesUseCase();
+    result.fold(
+            (l) => emit(state.copyWith(
+            topRatedMessage: l.message, topRatedState: RequestState.isError)),
+            (r) => emit(state.copyWith(
+            topRatedMovies: r, topRatedState: RequestState.isLoaded)));
+  }
+
 }

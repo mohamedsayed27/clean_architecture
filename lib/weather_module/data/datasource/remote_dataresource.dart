@@ -14,7 +14,6 @@ class RemoteDataResource implements BaseWeatherRemoteDataResource{
         var response = await Dio().get('${AppConstants.baseUrl}/weather?q=$cityName&appid=${AppConstants.apiKey}');
         return WeatherModel.fromJson(response.data);
       } catch (e) {
-        print(e);
         return null;
       }
   }

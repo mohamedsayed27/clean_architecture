@@ -2,6 +2,8 @@ import 'package:clean_arch_ug/movies_module/movies/data/datasources/movies_remot
 import 'package:clean_arch_ug/movies_module/movies/data/repository/movies_repository.dart';
 import 'package:clean_arch_ug/movies_module/movies/domain/repository/base_movie_repository.dart';
 import 'package:clean_arch_ug/movies_module/movies/domain/usecases/get_now_playing_movies_usecase.dart';
+import 'package:clean_arch_ug/movies_module/movies/domain/usecases/get_popular_movies_usecase.dart';
+import 'package:clean_arch_ug/movies_module/movies/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:clean_arch_ug/movies_module/movies/presentation/controller/movies_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,6 +17,8 @@ class ServicesLocator{
 
     ///USE CASES
     sl.registerLazySingleton(() => GetNowMoviesPlayingUseCase(sl()));
+    sl.registerLazySingleton(() => GetTopRatedMoviesUseCase(sl()));
+    sl.registerLazySingleton(() => GetPopularMoviesUseCase(sl()));
 
     ///REPOSITORY
     sl.registerLazySingleton<BaseMovieRepository>(() => MoviesRepository(sl()));

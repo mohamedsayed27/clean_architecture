@@ -14,11 +14,12 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
+      buildWhen: (previous, current) => previous.nowPlayingState != current.nowPlayingState,
       builder: (context, state) {
         switch (state.nowPlayingState) {
           case RequestState.isLoading:
             return const SizedBox(
-              height: 400.0,
+              height: 300.0,
               child: Center(
                 child: CircularProgressIndicator(),
               ),
@@ -28,7 +29,8 @@ class NowPlayingComponent extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               child: CarouselSlider(
                 options: CarouselOptions(
-                  height: 400.0,
+                  autoPlay: true,
+                  height: 300.0,
                   viewportFraction: 1.0,
                   onPageChanged: (index, reason) {},
                 ),

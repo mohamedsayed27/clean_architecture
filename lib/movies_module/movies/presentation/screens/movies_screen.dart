@@ -15,10 +15,11 @@ class MainMoviesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider(
-        create: (context) => sl<MoviesBloc>()..add(GetNowPlayingMoviesEvent()),
+        create: (context) => sl<MoviesBloc>()..add(GetNowPlayingMoviesEvent())..add(GetTopRatedMoviesEvent())..add(GetPopularMoviesEvent()),
         child: Scaffold(
-          backgroundColor: Colors.grey.shade800,
+          backgroundColor: Colors.grey.shade900,
           body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             key: const Key('movieScrollView'),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +104,6 @@ class MainMoviesScreen extends StatelessWidget {
                   ),
                 ),
                 const TopRatedComponent(),
-                const SizedBox(height: 50.0),
               ],
             ),
           ),
