@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:clean_arch_ug/movies_module/core/usecases/base_usecase.dart';
 import 'package:clean_arch_ug/movies_module/core/utils/enums.dart';
 import 'package:clean_arch_ug/movies_module/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:clean_arch_ug/movies_module/movies/domain/usecases/get_popular_movies_usecase.dart';
@@ -23,7 +24,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
 
 
   Future<void> _getNowPlayingMethod(event, emit) async {
-    final result = await getNowMoviesPlayingUseCase();
+    final result = await getNowMoviesPlayingUseCase(NoParameters());
     result.fold(
             (l) => emit(
             state.copyWith(
@@ -38,7 +39,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   }
 
   Future<void> _getPopularMethod(event, emit) async {
-    final result = await getPopularMoviesUseCase();
+    final result = await getPopularMoviesUseCase(NoParameters());
     result.fold(
             (l) => emit(state.copyWith(
             popularState: RequestState.isError, popularMessage: l.message)),
@@ -47,7 +48,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   }
 
   Future<void> _getTopRatedMethod(event, emit) async {
-    final result = await getTopRatedMoviesUseCase();
+    final result = await getTopRatedMoviesUseCase(NoParameters());
     result.fold(
             (l) => emit(state.copyWith(
             topRatedMessage: l.message, topRatedState: RequestState.isError)),

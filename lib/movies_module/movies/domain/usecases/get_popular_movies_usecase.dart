@@ -4,13 +4,13 @@ import 'package:clean_arch_ug/movies_module/movies/domain/entities/moveis_entity
 import 'package:clean_arch_ug/movies_module/movies/domain/repository/base_movie_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class GetPopularMoviesUseCase extends BaseUseCase{
+class GetPopularMoviesUseCase extends BaseUseCase<List<MoviesEntity>,NoParameters>{
   final BaseMovieRepository baseMovieRepository;
 
   GetPopularMoviesUseCase(this.baseMovieRepository);
 
   @override
-  Future<Either<Failure,List<MoviesEntity>>> call() async{
+  Future<Either<Failure,List<MoviesEntity>>> call(NoParameters parameters) async{
     return await baseMovieRepository.getPopularMovies();
   }
 

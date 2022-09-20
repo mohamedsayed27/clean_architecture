@@ -5,5 +5,8 @@ class MovieAppConstants{
   static const String popularMoviesEndPoint = 'movie/popular';
   static const String topRatedMoviesEndPoint = 'movie/top_rated';
   static const String baseImageUrl = 'https://image.tmdb.org/t/p/w500';
+  static String movieDetailsPath(int movieId) {
+    return '${baseUrl}movie/$movieId?api_key=$apiKey';
+  }
   static String imageUrl(String path) => '$baseImageUrl$path';
 }
