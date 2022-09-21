@@ -24,7 +24,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
 
 
   Future<void> _getNowPlayingMethod(event, emit) async {
-    final result = await getNowMoviesPlayingUseCase(NoParameters());
+    final result = await getNowMoviesPlayingUseCase(const NoParameters());
     result.fold(
             (l) => emit(
             state.copyWith(
@@ -39,7 +39,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   }
 
   Future<void> _getPopularMethod(event, emit) async {
-    final result = await getPopularMoviesUseCase(NoParameters());
+    final result = await getPopularMoviesUseCase(const NoParameters());
     result.fold(
             (l) => emit(state.copyWith(
             popularState: RequestState.isError, popularMessage: l.message)),
@@ -48,7 +48,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   }
 
   Future<void> _getTopRatedMethod(event, emit) async {
-    final result = await getTopRatedMoviesUseCase(NoParameters());
+    final result = await getTopRatedMoviesUseCase(const NoParameters());
     result.fold(
             (l) => emit(state.copyWith(
             topRatedMessage: l.message, topRatedState: RequestState.isError)),

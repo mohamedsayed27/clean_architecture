@@ -8,5 +8,8 @@ class MovieAppConstants{
   static String movieDetailsPath(int movieId) {
     return '${baseUrl}movie/$movieId?api_key=$apiKey';
   }
+  static String recommendationPath(int movieId) {
+    return '${baseUrl}movie/$movieId/recommendations?api_key=$apiKey';
+  }
   static String imageUrl(String path) => '$baseImageUrl$path';
 }

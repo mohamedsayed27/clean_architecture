@@ -2,8 +2,10 @@ import 'package:clean_arch_ug/movies_module/core/error/exception.dart';
 import 'package:clean_arch_ug/movies_module/core/network/error_message_model.dart';
 import 'package:clean_arch_ug/movies_module/core/utils/app_constants.dart';
 import 'package:clean_arch_ug/movies_module/core/utils/movie_details_parameters.dart';
+import 'package:clean_arch_ug/movies_module/core/utils/recommendation_parameters.dart';
 import 'package:clean_arch_ug/movies_module/movies/data/models/movie_details_model.dart';
 import 'package:clean_arch_ug/movies_module/movies/data/models/movies_model.dart';
+import 'package:clean_arch_ug/movies_module/movies/data/models/recommendation_model.dart';
 import 'package:dio/dio.dart';
 
 abstract class BaseMoviesRemoteDatasource {
@@ -14,6 +16,9 @@ abstract class BaseMoviesRemoteDatasource {
   Future<List<MoviesModel>> getTopRatedMovies();
 
   Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameters);
+
+  Future<List<RecommendationModel>> getRecommendedMovies(RecommendationParameters parameters);
+
 }
 
 
@@ -22,6 +27,7 @@ class MoviesRemoteDatasource extends BaseMoviesRemoteDatasource {
   List<MoviesModel> nowPlayingMoviesList = [];
   List<MoviesModel> popularMoviesList = [];
   List<MoviesModel> topRatedMoviesList = [];
+  List<RecommendationModel> recommendationList = [];
 
 
   @override
@@ -82,6 +88,23 @@ class MoviesRemoteDatasource extends BaseMoviesRemoteDatasource {
 
     if (response.statusCode == 200) {
       return MovieDetailsModel.fromJson(response.data);
+    } else {
+      throw ServerModelException(
+        errorMessageModel: ErrorMessageModel.fromJson(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<List<RecommendationModel>> getRecommendedMovies(RecommendationParameters parameters) async{
+    final response = await Dio().get(
+        MovieAppConstants.recommendationPath(parameters.id));
+
+    if (response.statusCode == 200) {
+      for (var element in response.data['results']) {
+        recommendationList.add(RecommendationModel.fromJson(element));
+      }
+      return recommendationList;
     } else {
       throw ServerModelException(
         errorMessageModel: ErrorMessageModel.fromJson(response.data),
